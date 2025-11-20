@@ -9,24 +9,33 @@ import GenerateRecipeBar from './components/GenerateRecipeBar'
 
 function App() {
 
-    let [ingredients, setIngredients] = useState(['Tomatoes', 'Onions', 'Garlic']);
+    let [ingredients, setIngredients] = useState(
+        // ['Tomatoes', 'Onions', 'Garlic']
+        []
+    );
 
     const ingredientListItems = ingredients.map((ingredient, index) => (
         <li key={index}>{ingredient}</li>
     ));
 
-    
 
 
     function handleSubmit(event) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        const ingredient = formData.get('ingredient'); // event.target.ingredient.value
+        const newIngredient = formData.get('ingredient'); // event.target.ingredient.value
 
-        // Add the new ingredient to the list
-        setIngredients([...ingredients, ingredient]);
-        
+        // Add the new ingredient and sort
+        setIngredients(function(prevIngredients) {
+            let newIngredientsList = [...prevIngredients];
+            newIngredientsList.push(newIngredient);
+            newIngredientsList.sort();
+            return newIngredientsList;
+        });
+
+        // Clear the input field
+        event.target.reset();
     }
 
 
@@ -34,8 +43,6 @@ function App() {
     return (
     <>
         <Header />
-
-
 
         {/* <AddIngredientsBar /> */}
         <div>
