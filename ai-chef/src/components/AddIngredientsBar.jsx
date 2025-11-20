@@ -1,8 +1,10 @@
 export default function AddIngredientsBar() {
     return (
         <div>
-            <input type="text" placeholder="Add an ingredient..." />
-            <button>Add</button>
+            <form className="add-ingredient-form">
+                <input type="text" placeholder="e.g. tomatoes" />
+                <button>Add Ingredient</button>
+            </form>
         </div>
     )
 }
