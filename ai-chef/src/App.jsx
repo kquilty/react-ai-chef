@@ -63,7 +63,7 @@ function App() {
 
 
         {/* <IngredientsList /> */}
-        <div>
+        <div className="ingredients-list">
             <h2>Ingredients on hand:</h2>
             <ul>
                 {ingredientListItems}
