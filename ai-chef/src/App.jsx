@@ -20,25 +20,31 @@ function App() {
 
 
 
-    function handleSubmit(event) {
-        event.preventDefault();
+    function handleSubmit(formData) {
+        const newIngredient = formData.get('ingredient');
 
-        const formData = new FormData(event.target);
-        const newIngredient = formData.get('ingredient'); // event.target.ingredient.value
-
-        // Add the new ingredient and sort
+        // Add the new ingredient
         setIngredients(function(prevIngredients) {
             let newIngredientsList = [...prevIngredients];
             newIngredientsList.push(newIngredient);
+
+            //...and sort it
             newIngredientsList.sort();
+
             return newIngredientsList;
         });
-
-        // Clear the input field
-        event.target.reset();
     }
 
-
+    function IngredientsList() {
+        return (
+            <div className="ingredients-list">
+                <h2>Ingredients on hand...</h2>
+                <ul>
+                    {ingredientListItems}
+                </ul>
+            </div>
+        );
+    }
 
     return (
     <>
@@ -46,7 +52,7 @@ function App() {
 
         {/* <AddIngredientsBar /> */}
         <div>
-            <form className="add-ingredient-form" onSubmit={handleSubmit}>
+            <form className="add-ingredient-form" action={handleSubmit}>
                 <input 
                     type="text" 
                     name="ingredient"
@@ -62,13 +68,7 @@ function App() {
 
 
 
-        {/* <IngredientsList /> */}
-        <div className="ingredients-list">
-            <h2>Ingredients on hand:</h2>
-            <ul>
-                {ingredientListItems}
-            </ul>
-        </div>
+        {ingredients.length > 0 && <IngredientsList />}
 
 
 
@@ -76,7 +76,7 @@ function App() {
 
 
 
-        <GenerateRecipeBar />
+        {/* <GenerateRecipeBar /> */}
     </>
   )
 }
