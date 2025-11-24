@@ -23,7 +23,7 @@ function App() {
             newIngredientsList.push(newIngredient);
 
             //...and sort it
-            newIngredientsList.sort();
+            // newIngredientsList.sort();
 
             return newIngredientsList;
         });
@@ -36,7 +36,6 @@ function App() {
     <>
         <Header />
 
-        {/* <AddIngredientsBar /> */}
         <div>
             <form className="add-ingredient-form" action={handleSubmit}>
                 <input 
@@ -58,10 +57,16 @@ function App() {
         {ingredients.length > 0 && 
             <IngredientsList ingredients={ingredients} />}
 
+
+        {/* "Add 3 more ingredients..." */}
+        <AddMoreIngredientsMessage 
+            ingredients={ingredients} 
+            MIN_INGREDIENTS_FOR_RECIPE={MIN_INGREDIENTS_FOR_RECIPE} 
+        />
+
+
         {ingredients.length >= MIN_INGREDIENTS_FOR_RECIPE &&
             <GenerateRecipeBar /> }
-
-        <AddMoreIngredientsMessage ingredients={ingredients} MIN_INGREDIENTS_FOR_RECIPE={MIN_INGREDIENTS_FOR_RECIPE} />
     </>
   )
 }
@@ -105,7 +110,6 @@ function IngredientsList({ ingredients }) {
 
     return (
         <div className="ingredients-list">
-            <h3>Ingredients on hand...</h3>
             <ul>
                 {ingredientListItems}
             </ul>

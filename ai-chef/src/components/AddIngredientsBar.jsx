@@ -1,23 +1,22 @@
 export default function AddIngredientsBar() {
 
-    function handleSubmit(event) {
-        event.preventDefault();
-
-        const formData = new FormData(event.target);
-        const ingredient = formData.get('ingredient'); // event.target.ingredient.value
+    function handleSubmit(formData) {
+        const ingredient = formData.get('ingredient');
         
         console.log("Add Ingredient form submitted: ", ingredient);
         
     }
 
+    const random_ingredient = "spinach";
+
     return (
         <div>
-            <form className="add-ingredient-form" onSubmit={handleSubmit}>
+            <form className="add-ingredient-form" action={handleSubmit}>
                 <input 
                     type="text" 
                     name="ingredient"
                     id="ingredient"
-                    placeholder="e.g. tomatoes" 
+                    placeholder={`e.g. ${random_ingredient}`} 
                 />
                 <button>Add Ingredient</button>
             </form>
