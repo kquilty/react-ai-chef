@@ -1,22 +1,14 @@
-export default function AddIngredientsBar() {
-
-    function handleSubmit(formData) {
-        const ingredient = formData.get('ingredient');
-        
-        console.log("Add Ingredient form submitted: ", ingredient);
-        
-    }
-
-    const random_ingredient = "spinach";
+export default function AddIngredientsBar(props) {
 
     return (
         <div>
-            <form className="add-ingredient-form" action={handleSubmit}>
+            <form className="add-ingredient-form" action={props.handleSubmit}>
                 <input 
                     type="text" 
                     name="ingredient"
                     id="ingredient"
-                    placeholder={`e.g. ${random_ingredient}`} 
+                    placeholder={`e.g. ${props.random_ingredient}`} 
+                    autoComplete="off"
                 />
                 <button>Add Ingredient</button>
             </form>

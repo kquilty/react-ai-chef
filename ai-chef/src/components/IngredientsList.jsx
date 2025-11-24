@@ -1,6 +1,4 @@
-export default function IngredientsList() {
-
-    const ingredients = ['Tomatoes', 'Onions', 'Garlic'];
+export default function IngredientsList({ ingredients }) {
 
     const ingredientListItems = ingredients.map((ingredient, index) => (
         <li key={index}>{ingredient}</li>
@@ -8,10 +6,9 @@ export default function IngredientsList() {
 
     return (
         <div className="ingredients-list">
-            <h2>Ingredients on hand...</h2>
             <ul>
                 {ingredientListItems}
             </ul>
         </div>
-    )
+    );
 }
