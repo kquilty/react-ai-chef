@@ -5,6 +5,7 @@ import Header from './components/Header'
 import AddIngredientsBar from './components/AddIngredientsBar'
 import IngredientsList from './components/IngredientsList'
 import GenerateRecipeBar from './components/GenerateRecipeBar'
+import RecipeResponse from './components/RecipeResponse'
 
 import { getRecipeFromChefClaude } from '../ai.js'
 
@@ -38,7 +39,10 @@ function App() {
 
         setRecipeArticle("Thinking...");
         getRecipeFromChefClaude(ingredients).then((recipeText) => {
+
+            // Save the response
             setRecipeArticle(recipeText);
+            
         });
     }
 
@@ -74,16 +78,6 @@ function App() {
 
     </>
   )
-}
-function RecipeResponse({article}) {
-    return (
-        <section>
-            <h2>chef.AI Recommends:</h2>
-            <article className="suggested-recipe-container" aria-live="polite">
-                {article}
-            </article>
-        </section>
-    )
 }
 
 function AddMoreIngredientsMessage({ ingredients, MIN_INGREDIENTS_FOR_RECIPE }) {
