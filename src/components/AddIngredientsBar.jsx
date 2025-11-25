@@ -10,7 +10,9 @@ export default function AddIngredientsBar(props) {
                     placeholder={`e.g. ${props.random_ingredient}`} 
                     autoComplete="off"
                 />
-                <button>Add Ingredient</button>
+                <button onClick={()=> {
+                    document.querySelector("#ingredient").focus()
+                }}>Add Ingredient</button>
             </form>
         </div>
     )

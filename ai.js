@@ -11,13 +11,17 @@ const anthropic = new Anthropic({
     dangerouslyAllowBrowser: true,
 })
 
-export async function getRecipeFromChefClaude(ingredientsArr) {
-
-    //simulate delay
-    // await new Promise((resolve) => setTimeout(resolve, 2000));
-    // return `# Delicious Recipe with ${ingredientsArr.join(", ")}`
+export async function getRecipeFromChefClaude(ingredientsArr, simulateOnly = false) {
 
     const ingredientsString = ingredientsArr.join(", ")
+
+    if (simulateOnly) {
+        
+        //simulate delay
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        return `# Delicious Recipe with ${ingredientsArr.join(", ")}`;
+    }
 
     const msg = await anthropic.messages.create({
         model: "claude-3-haiku-20240307",
