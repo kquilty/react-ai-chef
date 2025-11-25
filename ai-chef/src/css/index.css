@@ -1,4 +1,4 @@
-:root {
+:root, body, #root, button, input, select, textarea {
   font-family: "Nunito", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.2;
   font-weight: 400;

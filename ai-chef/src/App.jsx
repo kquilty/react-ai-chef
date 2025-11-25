@@ -107,14 +107,14 @@ function AddMoreIngredientsMessage({ ingredients, MIN_INGREDIENTS_FOR_RECIPE }) 
         if(ingredients.length === 0) {
             return (
                 <p className="add-more-ingredients-message">
-                    Add at least {MIN_INGREDIENTS_FOR_RECIPE} ingredients to enable recipe generation.
+                    Add at least <b>{MIN_INGREDIENTS_FOR_RECIPE} ingredients</b> to enable recipe generation.
                 </p>
             );
         } else {
             const ingredients_needed = MIN_INGREDIENTS_FOR_RECIPE - ingredients.length;
             return (
                 <p className="add-more-ingredients-message-light">
-                    (add {ingredients_needed} more ingredient{ingredients_needed > 1 ? 's' : ''})
+                    (add <b>{ingredients_needed} more</b> ingredient{ingredients_needed > 1 ? 's' : ''})
                 </p>
             );
         }
