@@ -101,7 +101,10 @@ function App() {
             [ Get a recipe ]
         */}
         {ingredients.length >= MIN_INGREDIENTS_FOR_RECIPE &&
-            <GenerateRecipeBar onGetRecipeClick={onGetRecipeClick} /> 
+            <GenerateRecipeBar 
+                onGetRecipeClick={onGetRecipeClick} 
+                isDisabled={ingredients.length < MIN_INGREDIENTS_FOR_RECIPE || isThinking}
+            />
         }
 
 
