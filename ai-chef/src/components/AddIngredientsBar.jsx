@@ -2,7 +2,7 @@ export default function AddIngredientsBar(props) {
 
     return (
         <div>
-            <form className="add-ingredient-form" action={props.handleSubmit}>
+            <form className="add-ingredient-form" action={props.onSubmit}>
                 <input 
                     type="text" 
                     name="ingredient"

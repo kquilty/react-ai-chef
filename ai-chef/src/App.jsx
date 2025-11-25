@@ -11,6 +11,7 @@ import loadingImage from './images/loading-79.gif'
 
 
 function App() {
+    const MIN_INGREDIENTS_FOR_RECIPE = 3;
 
     let [ingredients, setIngredients] = useState(
         // ['bacon', 'eggs', 'cheese']
@@ -21,43 +22,36 @@ function App() {
     let [isThinking, setIsThinking] = useState(false);
 
 
-    function handleSubmit(formData) {
+    function onSubmitNewIngredient(formData) {
         const newIngredient = formData.get('ingredient');
 
         // Add the new ingredient
         setIngredients(function(prevIngredients) {
             let newIngredientsList = [...prevIngredients];
             newIngredientsList.push(newIngredient);
-
-            //...and sort it
-            // newIngredientsList.sort();
-
             return newIngredientsList;
         });
     }
 
-    const MIN_INGREDIENTS_FOR_RECIPE = 3;
-
-    function handleGenerateRecipeClick() {
+    function onGetRecipeClick() {
 
         // Show the "Thinking..." message
         setIsThinking(true)
-
-        // Scroll to the "Thinking..."
         setTimeout(() => {
             document.querySelector('.thinking-message').scrollIntoView({behavior: 'smooth'})
         }, 100)
 
+        // Call the AI to get a recipe
         getRecipeFromChefClaude(ingredients).then((recipeText) => {
 
-            setIsThinking(false);
-            
             // Save the response
             setRecipeArticle(recipeText);
 
-            setRecipeShown(true);
+            // Hide the "Thinking..." message
+            setIsThinking(false);
 
-            // Scroll to the recipe
+            // Show the recipe
+            setRecipeShown(true);
             setTimeout(() => {
                 document.querySelector('.suggested-recipe-container').scrollIntoView({behavior: 'smooth'})
             }, 100)
@@ -68,31 +62,66 @@ function App() {
     <>
         <Header />
 
+
+        {/*
+            [_______________________] [Add Ingredient] 
+        */}
         <AddIngredientsBar 
-            handleSubmit={handleSubmit} 
+            onSubmit={onSubmitNewIngredient} 
             random_ingredient={ getRandomSampleIngredient() }
         />
 
+
+        {/* 
+            -----------------
+            |  Ingredients  |
+            -----------------
+            |  Lettuce      |
+            |  Tomatoes     |
+            |  Bacon        |
+            |  Bread        |
+            -----------------
+        */}
         {ingredients.length > 0 && 
             <IngredientsList ingredients={ingredients} />
         }
 
 
-        {/* "Add 3 more ingredients..." */}
+        {/* 
+            "(add 3 more ingredients)" 
+        */}
         <AddMoreIngredientsMessage 
             ingredients={ingredients} 
             MIN_INGREDIENTS_FOR_RECIPE={MIN_INGREDIENTS_FOR_RECIPE} 
         />
 
 
+        {/* 
+            Are you ready for a recipe?
+            [ Get a recipe ]
+        */}
         {ingredients.length >= MIN_INGREDIENTS_FOR_RECIPE &&
-            <GenerateRecipeBar onClick={handleGenerateRecipeClick} /> 
+            <GenerateRecipeBar onGetRecipeClick={onGetRecipeClick} /> 
         }
 
+
+        {/* 
+            [ Thinking... ]
+        */}
         {isThinking && 
             <ThinkingMessage />
         }
 
+
+        {/* 
+            [ Suggested recipe ]
+            Make a BLT Sandwich
+            Ingredients:
+            - Lettuce
+            - Tomatoes
+            - Bacon
+            ...
+        */}
         {recipeShown && 
             <RecipeResponse article={recipeArticle} />
         }
