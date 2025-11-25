@@ -73,6 +73,30 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
     margin: 0;
 }
+
+.clear-ingredients-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.5rem;
+    font-size: 1rem;
+    padding-bottom: 0;
+}
+.clear-ingredients-button {
+    /* background-color: #EF4444; */
+    /* color: white; */
+    opacity: 0.6;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #D1D5DB;
+}
+
 .ingredients-list {
     font-family: "The Girl Next Door", cursive;
     font-size: 1.3rem;
@@ -81,7 +105,7 @@ h1, h2, h3, h4, h5, h6 {
     /* align-items: center; */
     gap: 0.5rem;
     background-color: #F5ECA0;
-    padding: 1.5rem 2rem;
+    /* padding: 1.5rem 2rem; */
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 500px;

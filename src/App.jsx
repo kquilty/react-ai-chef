@@ -22,6 +22,13 @@ function App() {
     let [isThinking, setIsThinking] = useState(false);
 
 
+    function onClearIngredientsClick() {
+        setIngredients([]);
+        setRecipeShown(false);
+        setRecipeArticle("(no recipe generated yet)");
+        document.querySelector('#ingredient').focus();
+    }
+
     function onSubmitNewIngredient(formData) {
         const newIngredient = formData.get('ingredient');
 
@@ -93,7 +100,10 @@ function App() {
                 -----------------
             */}
             {ingredients.length > 0 && 
-                <IngredientsList ingredients={ingredients} />
+                <IngredientsList 
+                    ingredients={ingredients} 
+                    onClearIngredientsClick={() => onClearIngredientsClick()}
+                    />
             }
 
 
