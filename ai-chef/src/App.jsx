@@ -1,20 +1,24 @@
 import { useState } from 'react';
-
-import './css/App.css'
 import Header from './components/Header'
 import AddIngredientsBar from './components/AddIngredientsBar'
 import IngredientsList from './components/IngredientsList'
 import GenerateRecipeBar from './components/GenerateRecipeBar'
 import RecipeResponse from './components/RecipeResponse'
 
+import './css/App.css'
 import { getRecipeFromChefClaude } from '../ai.js'
+import loadingImage from './images/loading-79.gif'
 
 
 function App() {
 
-    let [ingredients, setIngredients] = useState([]);
+    let [ingredients, setIngredients] = useState(
+        // ['bacon', 'eggs', 'cheese']
+        []
+    );
     let [recipeShown, setRecipeShown] = useState(false);
     let [recipeArticle, setRecipeArticle] = useState("(no recipe generated yet)");
+    let [isThinking, setIsThinking] = useState(false);
 
 
     function handleSubmit(formData) {
@@ -35,14 +39,28 @@ function App() {
     const MIN_INGREDIENTS_FOR_RECIPE = 3;
 
     function handleGenerateRecipeClick() {
-        setRecipeShown(true)
 
-        setRecipeArticle("Thinking...");
+        // Show the "Thinking..." message
+        setIsThinking(true)
+
+        // Scroll to the "Thinking..."
+        setTimeout(() => {
+            document.querySelector('.thinking-message').scrollIntoView({behavior: 'smooth'})
+        }, 100)
+
         getRecipeFromChefClaude(ingredients).then((recipeText) => {
 
+            setIsThinking(false);
+            
             // Save the response
             setRecipeArticle(recipeText);
-            
+
+            setRecipeShown(true);
+
+            // Scroll to the recipe
+            setTimeout(() => {
+                document.querySelector('.suggested-recipe-container').scrollIntoView({behavior: 'smooth'})
+            }, 100)
         });
     }
 
@@ -71,6 +89,9 @@ function App() {
             <GenerateRecipeBar onClick={handleGenerateRecipeClick} /> 
         }
 
+        {isThinking && 
+            <ThinkingMessage />
+        }
 
         {recipeShown && 
             <RecipeResponse article={recipeArticle} />
@@ -78,6 +99,19 @@ function App() {
 
     </>
   )
+}
+
+function ThinkingMessage() {
+    return (
+        <p className="thinking-message-wrapper">
+            <div>
+                <img src={loadingImage} alt="Loading..." />
+            </div>
+            <div className="thinking-message">
+                Thinking...
+            </div>
+        </p>
+    );
 }
 
 function AddMoreIngredientsMessage({ ingredients, MIN_INGREDIENTS_FOR_RECIPE }) {

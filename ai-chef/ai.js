@@ -12,6 +12,11 @@ const anthropic = new Anthropic({
 })
 
 export async function getRecipeFromChefClaude(ingredientsArr) {
+
+    //simulate delay
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
+    // return `# Delicious Recipe with ${ingredientsArr.join(", ")}`
+
     const ingredientsString = ingredientsArr.join(", ")
 
     const msg = await anthropic.messages.create({
