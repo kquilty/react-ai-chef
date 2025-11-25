@@ -62,73 +62,74 @@ function App() {
     <>
         <Header />
 
-
-        {/*
-            [_______________________] [Add Ingredient] 
-        */}
-        <AddIngredientsBar 
-            onSubmit={onSubmitNewIngredient} 
-            random_ingredient={ getRandomSampleIngredient() }
-        />
-
-
-        {/* 
-            -----------------
-            |  Ingredients  |
-            -----------------
-            |  Lettuce      |
-            |  Tomatoes     |
-            |  Bacon        |
-            |  Bread        |
-            -----------------
-        */}
-        {ingredients.length > 0 && 
-            <IngredientsList ingredients={ingredients} />
-        }
-
-
-        {/* 
-            "(add 3 more ingredients)" 
-        */}
-        <AddMoreIngredientsMessage 
-            ingredients={ingredients} 
-            MIN_INGREDIENTS_FOR_RECIPE={MIN_INGREDIENTS_FOR_RECIPE} 
-        />
-
-
-        {/* 
-            Are you ready for a recipe?
-            [ Get a recipe ]
-        */}
-        {ingredients.length >= MIN_INGREDIENTS_FOR_RECIPE &&
-            <GenerateRecipeBar 
-                onGetRecipeClick={onGetRecipeClick} 
-                isDisabled={ingredients.length < MIN_INGREDIENTS_FOR_RECIPE || isThinking}
+        <div className='main-content'>
+            {/*
+                [_______________________] [Add Ingredient] 
+            */}
+            <AddIngredientsBar 
+                onSubmit={onSubmitNewIngredient} 
+                random_ingredient={ getRandomSampleIngredient() }
             />
-        }
 
 
-        {/* 
-            [ Thinking... ]
-        */}
-        {isThinking && 
-            <ThinkingMessage />
-        }
+            {/* 
+                -----------------
+                |  Ingredients  |
+                -----------------
+                |  Lettuce      |
+                |  Tomatoes     |
+                |  Bacon        |
+                |  Bread        |
+                -----------------
+            */}
+            {ingredients.length > 0 && 
+                <IngredientsList ingredients={ingredients} />
+            }
 
 
-        {/* 
-            [ Suggested recipe ]
-            Make a BLT Sandwich
-            Ingredients:
-            - Lettuce
-            - Tomatoes
-            - Bacon
-            ...
-        */}
-        {recipeShown && 
-            <RecipeResponse article={recipeArticle} />
-        }
+            {/* 
+                "(add 3 more ingredients)" 
+            */}
+            <AddMoreIngredientsMessage 
+                ingredients={ingredients} 
+                MIN_INGREDIENTS_FOR_RECIPE={MIN_INGREDIENTS_FOR_RECIPE} 
+            />
 
+
+            {/* 
+                Are you ready for a recipe?
+                [ Get a recipe ]
+            */}
+            {ingredients.length >= MIN_INGREDIENTS_FOR_RECIPE &&
+                <GenerateRecipeBar 
+                    onGetRecipeClick={onGetRecipeClick} 
+                    isDisabled={ingredients.length < MIN_INGREDIENTS_FOR_RECIPE || isThinking}
+                />
+            }
+
+
+            {/* 
+                [ Thinking... ]
+            */}
+            {isThinking && 
+                <ThinkingMessage />
+            }
+
+
+            {/* 
+                [ Suggested recipe ]
+                Make a BLT Sandwich
+                Ingredients:
+                - Lettuce
+                - Tomatoes
+                - Bacon
+                ...
+            */}
+            {recipeShown && 
+                <RecipeResponse article={recipeArticle} />
+            }
+
+        </div>
     </>
   )
 }
