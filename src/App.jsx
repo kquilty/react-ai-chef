@@ -138,7 +138,7 @@ function ThinkingMessage() {
     return (
         <p className="thinking-message-wrapper">
             <div>
-                <img src={loadingImage} alt="Loading..." />
+                <img src={loadingImage} height="200px" alt="Loading..." />
             </div>
             <div className="thinking-message">
                 Thinking...
