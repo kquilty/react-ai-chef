@@ -25,6 +25,16 @@ function App() {
     function onSubmitNewIngredient(formData) {
         const newIngredient = formData.get('ingredient');
 
+        // Ignore empty or duplicate ingredients
+        if (!newIngredient) {
+            return;
+        }
+        const prevIngredients = ingredients.map(ing => ing.toLowerCase());
+        if(prevIngredients.includes(newIngredient.toLowerCase())) {
+            alert(`${newIngredient} has already been added.`);
+            return;
+        }
+
         // Add the new ingredient
         setIngredients(function(prevIngredients) {
             let newIngredientsList = [...prevIngredients];
