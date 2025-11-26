@@ -21,6 +21,11 @@ function App() {
     let [recipeArticle, setRecipeArticle] = useState("(no recipe generated yet)");
     let [isThinking, setIsThinking] = useState(false);
 
+    // On load, focus the input box
+    useEffect(() => {
+        document.querySelector('#ingredient').focus();
+    }, []);
+
     // When thinking starts, scroll to the thinking message
     useEffect(() => {
         if (isThinking) {
