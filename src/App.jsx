@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header'
 import AddIngredientsBar from './components/AddIngredientsBar'
 import IngredientsList from './components/IngredientsList'
@@ -21,6 +21,9 @@ function App() {
     let [recipeArticle, setRecipeArticle] = useState("(no recipe generated yet)");
     let [isThinking, setIsThinking] = useState(false);
 
+    let refThinkingMessageText = useRef(null);
+    let refSuggestedRecipeContainer = useRef(null);
+
     // On load, focus the input box
     useEffect(() => {
         document.querySelector('#ingredient').focus();
@@ -29,14 +32,14 @@ function App() {
     // When thinking starts, scroll to the thinking message
     useEffect(() => {
         if (isThinking) {
-            document.querySelector('.thinking-message').scrollIntoView({behavior: 'smooth'})
+            refThinkingMessageText.current.scrollIntoView({behavior: 'smooth'})
         }
     }, [isThinking]);
 
     // When the recipe is shown, scroll to the recipe
     useEffect(() => {
         if (recipeShown) {
-            document.querySelector('.suggested-recipe-container').scrollIntoView({behavior: 'smooth'})
+            refSuggestedRecipeContainer.current.scrollIntoView({behavior: 'smooth'})
         }
     }, [recipeShown]);
 
@@ -154,7 +157,8 @@ function App() {
                 [ Thinking... ]
             */}
             {isThinking && 
-                <ThinkingMessage />
+                <ThinkingMessage 
+                    refThinkingMessageText={refThinkingMessageText} />
             }
 
 
@@ -168,7 +172,9 @@ function App() {
                 ...
             */}
             {recipeShown && 
-                <RecipeResponse article={recipeArticle} />
+                <RecipeResponse 
+                    article={recipeArticle} 
+                    ref={refSuggestedRecipeContainer} />
             }
 
         </div>
@@ -176,13 +182,13 @@ function App() {
   )
 }
 
-function ThinkingMessage() {
+function ThinkingMessage({refThinkingMessageText}) {
     return (
         <p className="thinking-message-wrapper">
             <div>
                 <img src={loadingImage} height="200px" alt="Loading..." />
             </div>
-            <div className="thinking-message">
+            <div ref={refThinkingMessageText} className="thinking-message">
                 Thinking...
             </div>
         </p>
