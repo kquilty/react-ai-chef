@@ -12,7 +12,7 @@ export default function AddIngredientsBar(props) {
                 />
                 <button onClick={()=> {
                     document.querySelector("#ingredient").focus()
-                }}>Add Ingredient</button>
+                }}>+ Add Ingredient</button>
             </form>
         </div>
     )

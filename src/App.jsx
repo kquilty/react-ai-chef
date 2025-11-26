@@ -41,24 +41,34 @@ function App() {
     }, [recipeShown]);
 
     function onSubmitNewIngredient(formData) {
-        const newIngredient = formData.get('ingredient');
+        const newIngredientCSV = formData.get('ingredient').trim();
 
         // Ignore empty or duplicate ingredients
-        if (!newIngredient) {
-            return;
-        }
-        const prevIngredients = ingredients.map(ing => ing.toLowerCase());
-        if(prevIngredients.includes(newIngredient.toLowerCase())) {
-            alert(`${newIngredient} has already been added.`);
+        if (!newIngredientCSV) {
             return;
         }
 
-        // Add the new ingredient
-        setIngredients(function(prevIngredients) {
-            let newIngredientsList = [...prevIngredients];
-            newIngredientsList.push(newIngredient);
-            return newIngredientsList;
-        });
+        // Support multiple ingredients separated by commas
+        const newIngredientsArray = newIngredientCSV.split(',');
+        for (let i = 0; i < newIngredientsArray.length; i++) {
+
+            const singleIngredient = newIngredientsArray[i].trim();
+
+            const prevIngredientsLowered = ingredients.map(ing => ing.toLowerCase());
+            if(prevIngredientsLowered.includes(singleIngredient.toLowerCase())) {
+                alert(`${singleIngredient} has already been added.`);
+                continue;
+            }
+
+            // Add the new ingredient(s)
+            setIngredients(function(prevIngredients) {
+                let newIngredientsList = [...prevIngredients];
+
+                newIngredientsList.push(singleIngredient);
+
+                return newIngredientsList;
+            });
+        }
     }
 
     function onClearIngredientsClick() {
@@ -93,7 +103,7 @@ function App() {
 
         <div className='main-content'>
             {/*
-                [_______________________] [Add Ingredient] 
+                [_______________________] [+ Add Ingredient] 
             */}
             <AddIngredientsBar 
                 onSubmit={onSubmitNewIngredient} 
@@ -202,9 +212,14 @@ function AddMoreIngredientsMessage({ ingredients, MIN_INGREDIENTS_FOR_RECIPE }) 
 
 function getRandomSampleIngredient() {
     const sample_ingredients = [
-        "chicken", "beef", "pork", "tofu", "mushrooms", "onions", "garlic", 
-        "tomatoes", "bell peppers", "carrots", "broccoli", "spinach", "rice", 
-        "pasta", "cheese", "eggs", "milk", "butter", "potatoes", "beans"];
+        "chicken, broccoli, rice", 
+        "beef, eggs, milk", 
+        "pork, spinach, cheese", 
+        "tofu, mushrooms, carrots", 
+        "garlic, onions, tomatoes", 
+        "bell peppers", 
+        "pasta, cheese, butter", 
+        "potatoes, beans"];
 
     const randomIndex = Math.floor(Math.random() * sample_ingredients.length);
     return sample_ingredients[randomIndex];
