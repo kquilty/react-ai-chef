@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header'
 import AddIngredientsBar from './components/AddIngredientsBar'
 import IngredientsList from './components/IngredientsList'
@@ -14,20 +14,26 @@ function App() {
     const MIN_INGREDIENTS_FOR_RECIPE = 3;
 
     let [ingredients, setIngredients] = useState(
-        // ['bacon', 'eggs', 'cheddar cheese and other cheeses', 'spinach', 'mushrooms', 'onions', 'bell peppers']
+        // ['bacon', 'eggs', 'cheddar cheese and some other cheeses too', 'spinach', 'mushrooms', 'onions', 'bell peppers']
         []
     );
     let [recipeShown, setRecipeShown] = useState(false);
     let [recipeArticle, setRecipeArticle] = useState("(no recipe generated yet)");
     let [isThinking, setIsThinking] = useState(false);
 
+    // When thinking starts, scroll to the thinking message
+    useEffect(() => {
+        if (isThinking) {
+            document.querySelector('.thinking-message').scrollIntoView({behavior: 'smooth'})
+        }
+    }, [isThinking]);
 
-    function onClearIngredientsClick() {
-        setIngredients([]);
-        setRecipeShown(false);
-        setRecipeArticle("(no recipe generated yet)");
-        document.querySelector('#ingredient').focus();
-    }
+    // When the recipe is shown, scroll to the recipe
+    useEffect(() => {
+        if (recipeShown) {
+            document.querySelector('.suggested-recipe-container').scrollIntoView({behavior: 'smooth'})
+        }
+    }, [recipeShown]);
 
     function onSubmitNewIngredient(formData) {
         const newIngredient = formData.get('ingredient');
@@ -50,13 +56,17 @@ function App() {
         });
     }
 
+    function onClearIngredientsClick() {
+        setIngredients([]);
+        setRecipeShown(false);
+        setRecipeArticle("(no recipe generated yet)");
+        document.querySelector('#ingredient').focus();
+    }
+
     function onGetRecipeClick() {
 
         // Show the "Thinking..." message
-        setIsThinking(true)
-        setTimeout(() => {
-            document.querySelector('.thinking-message').scrollIntoView({behavior: 'smooth'})
-        }, 100)
+        setIsThinking(true);
 
         // Call the AI to get a recipe
         getRecipeFromChefClaude(ingredients).then((recipeText) => {
@@ -69,9 +79,6 @@ function App() {
 
             // Show the recipe
             setRecipeShown(true);
-            setTimeout(() => {
-                document.querySelector('.suggested-recipe-container').scrollIntoView({behavior: 'smooth'})
-            }, 100)
         });
     }
 
