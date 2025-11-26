@@ -97,30 +97,37 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid #D1D5DB;
 }
 
-.ingredients-list {
+.ingredients-list-wrapper {
     font-family: "The Girl Next Door", cursive;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     gap: 0.5rem;
     background-color: #F5ECA0;
     /* padding: 1.5rem 2rem; */
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.226);
+    max-width: 90%;
     margin: 0 auto;
     list-style-position: inside;
     text-align: left;
     width: fit-content;
-    min-width: 300px;
-    min-height: 300px;
-    li {
-        font-family: "The Girl Next Door", cursive;
-        font-size: 3.5rem;
-        line-height: 1.2;
-        list-style: none;
-    }
+    min-width: 400px;
+    min-height: 400px;
+}
+.ingredients-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+}
+.added-ingredient {
+    font-family: "The Girl Next Door", cursive;
+    font-size: 3rem;
+    line-height: 1.2;
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
 }
 
 .add-more-ingredients-message {

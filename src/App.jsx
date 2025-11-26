@@ -14,7 +14,7 @@ function App() {
     const MIN_INGREDIENTS_FOR_RECIPE = 3;
 
     let [ingredients, setIngredients] = useState(
-        // ['bacon', 'eggs', 'cheese']
+        // ['bacon', 'eggs', 'cheddar cheese and other cheeses', 'spinach', 'mushrooms', 'onions', 'bell peppers']
         []
     );
     let [recipeShown, setRecipeShown] = useState(false);
