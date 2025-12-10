@@ -43,7 +43,7 @@ body {
 .add-ingredient-form {
     display: flex;
     gap: 0.5rem;
-    margin: 2rem 0;
+    margin-bottom: 2rem;
     justify-content: center;
     input {
         border-radius: 6px;
@@ -132,14 +132,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .add-more-ingredients-message {
     font-size: 1rem;
-    color: #374151;
+    color: #9c9c9c;
     text-align: center;
     margin-top: 0.5rem;
 }
 
 .add-more-ingredients-message-light {
     font-size: 1rem;
-    color: #b4bbca;
+    color: #c8cfdd;
     text-align: center;
     margin-top: 0.5rem;
 }

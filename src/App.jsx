@@ -6,6 +6,7 @@ import GenerateRecipeBar from './components/GenerateRecipeBar'
 import RecipeResponse from './components/RecipeResponse'
 
 import './css/App.css'
+import './css/typing-effect.css'
 import { getRecipeFromChefClaude } from '../ai.js'
 import loadingImage from './images/loading-79.gif'
 
@@ -27,6 +28,23 @@ function App() {
     // On load, focus the input box
     useEffect(() => {
         document.querySelector('#ingredient').focus();
+
+
+        // show messages one at a time.
+        setTimeout(() => {
+            // message 1 will start automatically from the css (after 1 second)
+
+            // show message 2 for 4 seconds
+            document.querySelector('.anim-typewriter').style.display = 'none';
+            document.querySelector('.anim-typewriter2').style.display = 'block';
+            
+            // show message 3 after 6 seconds
+            setTimeout(() => {
+                document.querySelector('.anim-typewriter2').style.display = 'none';
+                document.querySelector('.anim-typewriter3').style.display = 'block';
+            }, 6000);
+            
+        }, 4000);
     }, []);
 
     // When thinking starts, scroll to the thinking message
@@ -103,6 +121,14 @@ function App() {
     return (
     <>
         <Header />
+
+
+        <br />
+        <br />
+        <p class="line-1 anim-typewriter">Hi there!</p>
+        <p class="line-1 anim-typewriter2" style={{display: 'none'}}>Let me suggest a recipe for you.</p>
+        <p class="line-1 anim-typewriter3" style={{display: 'none'}}>What ingredients do you have on hand?</p>
+
 
         <div className='main-content'>
             {/*
@@ -201,7 +227,7 @@ function AddMoreIngredientsMessage({ ingredients, MIN_INGREDIENTS_FOR_RECIPE }) 
         if(ingredients.length === 0) {
             return (
                 <p className="add-more-ingredients-message">
-                    Add at least <b>{MIN_INGREDIENTS_FOR_RECIPE} ingredients</b> to enable recipe generation.
+                    (add at least <b>{MIN_INGREDIENTS_FOR_RECIPE} ingredients</b> to get started)
                 </p>
             );
         } else {
