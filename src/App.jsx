@@ -123,12 +123,11 @@ function App() {
         <Header />
 
 
-        <br />
-        <br />
-        <p class="line-1 anim-typewriter">Hi there!</p>
-        <p class="line-1 anim-typewriter2" style={{display: 'none'}}>Let me suggest a recipe for you.</p>
-        <p class="line-1 anim-typewriter3" style={{display: 'none'}}>What ingredients do you have on hand?</p>
-
+        <div className="typing-effect-container">
+            <p class="line-1 anim-typewriter">Hi there!</p>
+            <p class="line-1 anim-typewriter2" style={{display: 'none'}}>Let me suggest a recipe for you.</p>
+            <p class="line-1 anim-typewriter3" style={{display: 'none'}}>What ingredients do you have on hand?</p>
+        </div>
 
         <div className='main-content'>
             {/*

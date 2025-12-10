@@ -13,11 +13,20 @@
     transform: translateY(-50%);
 }
 
+.typing-effect-container {
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+
 /* If screen is smaller than 800px...*/
 @media (max-width: 800px) {
     .line-1{
         font-size: 1rem;
-        padding: 10px
+        padding-bottom: 10px
+    }
+    .typing-effect-container {
+        margin-top: 20px;
+        margin-bottom: 0px;
     }
 } 
 
