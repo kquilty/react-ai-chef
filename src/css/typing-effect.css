@@ -3,15 +3,23 @@
 .line-1{
     position: relative;
     top: 50%;  
-    width: 24em;
+    /* width: 24em; */
     margin: 0 auto;
     border-right: 2px solid rgba(65, 65, 65, 0.75);
-    font-size: 180%;
+    font-size: 1.8rem;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
-    transform: translateY(-50%);    
+    transform: translateY(-50%);
 }
+
+/* If screen is smaller than 800px...*/
+@media (max-width: 800px) {
+    .line-1{
+        font-size: 1rem;
+        padding: 10px
+    }
+} 
 
 /* Animation */
 .anim-typewriter{
