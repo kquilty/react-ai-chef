@@ -243,15 +243,27 @@ function AddMoreIngredientsMessage({ ingredients, MIN_INGREDIENTS_FOR_RECIPE }) 
 }
 
 function getRandomSampleIngredient() {
+    // const sample_ingredients = [
+    //     "chicken, broccoli, rice", 
+    //     "beef, eggs, milk", 
+    //     "pork, spinach, cheese", 
+    //     "tofu, mushrooms, carrots", 
+    //     "garlic, onions, tomatoes", 
+    //     "bell peppers", 
+    //     "pasta, cheese, butter", 
+    //     "potatoes, beans"];
+    //
+    // Instead of grouping like this ^
+    // show each suggestion individually
     const sample_ingredients = [
-        "chicken, broccoli, rice", 
-        "beef, eggs, milk", 
-        "pork, spinach, cheese", 
-        "tofu, mushrooms, carrots", 
-        "garlic, onions, tomatoes", 
+        "chicken", "broccoli", "rice", 
+        "beef", "eggs", "milk", 
+        "pork", "spinach", "cheese", 
+        "tofu", "mushrooms", "carrots", 
+        "garlic", "onions", "tomatoes", 
         "bell peppers", 
-        "pasta, cheese, butter", 
-        "potatoes, beans"];
+        "pasta", "cheese", "butter", 
+        "potatoes", "beans"];
 
     const randomIndex = Math.floor(Math.random() * sample_ingredients.length);
     return sample_ingredients[randomIndex];
